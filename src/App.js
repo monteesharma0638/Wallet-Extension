@@ -1,23 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import DataContext from "./DataContext";
+import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import Login from "./pages/Login";
+import CreatePopup from "./pages/CreatePopup";
+import CreateNewWallet from "./pages/CreateNewWallet";
+import Home from "./pages/Home";
+import AssetPage from "./pages/AssetPage";
+import CreatePassword from "./pages/CreatePassword";
+import SendAddressSelection from "./pages/SendAddressSelection";
+
+const router = createMemoryRouter([
+  {
+    path: "",
+    element: <DataContext />,
+    errorElement: "Having an error",
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+      {
+        path: "create-new-wallet/:password",
+        element: <CreateNewWallet />
+      },
+      {
+        path: "home",
+        element: <Home />
+      },
+      {
+        path: "create-password",
+        element: <CreatePassword />
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "sendaddrslc",
+        element: <SendAddressSelection />,
+      },
+    ],
+  },
+]);
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RouterProvider router={router} />
     </div>
   );
 }
